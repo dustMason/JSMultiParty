@@ -33,7 +33,7 @@ MCNearbyServiceBrowserDelegate {
   
   let recycledPeerIdKey = "recycled-multiparty-peer-id"
   
-  init(serviceType: String) {
+  public init(serviceType: String) {
     super.init()
     self.myPeerId = getRecycledPeerId()
     self.serviceType = serviceType
@@ -43,7 +43,7 @@ MCNearbyServiceBrowserDelegate {
     self.disconnect()
   }
   
-  func connectAs(name: String) {
+  public func connectAs(name: String) {
     if mcSession == nil {
       mcSession = MCSession(peer: myPeerId)
       mcSession.delegate = self
@@ -61,7 +61,7 @@ MCNearbyServiceBrowserDelegate {
     }
   }
   
-  func disconnect() {
+  public func disconnect() {
     self.serviceAdvertiser.stopAdvertisingPeer()
     self.serviceAdvertiser.delegate = nil
     self.serviceAdvertiser = nil
@@ -73,24 +73,24 @@ MCNearbyServiceBrowserDelegate {
     self.mcSession = nil
   }
   
-  func connectedPeers() -> [MCPeerID] {
+  public func connectedPeers() -> [MCPeerID] {
     return self.mcSession.connectedPeers as [MCPeerID]
   }
   
-  func sendMessageToPeerId(peerId: MCPeerID, message: AnyObject) -> NSError? {
+  public func sendMessageToPeerId(peerId: MCPeerID, message: AnyObject) -> NSError? {
     let data: NSData = NSKeyedArchiver.archivedDataWithRootObject(message)
     var error: NSError?
     self.mcSession.sendData(data, toPeers: [peerId], withMode: MCSessionSendDataMode.Reliable, error: &error)
     return error
   }
   
-  func sendImageToPeerId(peerId: MCPeerID, imageURL: NSURL, imageName: String) {
+  public func sendImageToPeerId(peerId: MCPeerID, imageURL: NSURL, imageName: String) {
     self.mcSession.sendResourceAtURL(imageURL, withName: imageName, toPeer: peerId, withCompletionHandler: nil)
   }
   
   // mark: MCSessionDelegate
   
-  func session(
+  public func session(
     session: MCSession!,
     didReceiveData data: NSData!,
     fromPeer peerId: MCPeerID!
@@ -101,7 +101,7 @@ MCNearbyServiceBrowserDelegate {
     }
   }
   
-  func session(
+  public func session(
     session: MCSession!,
     peer peerId: MCPeerID!,
     didChangeState state: MCSessionState
@@ -113,18 +113,18 @@ MCNearbyServiceBrowserDelegate {
     }
   }
   
-  func session(session: MCSession!, didReceiveStream stream: NSInputStream!,
+  public func session(session: MCSession!, didReceiveStream stream: NSInputStream!,
     withName streamName: String!, fromPeer peerID: MCPeerID!) {
     self.delegate?.didReceiveStream(stream, withName: streamName, fromPeer: peerID)
   }
   
-  func session(session: MCSession!,
+  public func session(session: MCSession!,
     didStartReceivingResourceWithName resourceName: String!,
     fromPeer peerID: MCPeerID!, withProgress progress: NSProgress!) {
     delegate?.didStartReceivingImage(peerID, progress: progress)
   }
   
-  func session(session: MCSession!,
+  public func session(session: MCSession!,
     didFinishReceivingResourceWithName resourceName: String!,
     fromPeer peerID: MCPeerID!,
     atURL localURL: NSURL!, withError error: NSError!) {
@@ -139,21 +139,21 @@ MCNearbyServiceBrowserDelegate {
   
   // mark: MCNearbyServiceBrowserDelegate
   
-  func advertiser(advertiser: MCNearbyServiceAdvertiser!, didNotStartAdvertisingPeer error: NSError!) {
+  public func advertiser(advertiser: MCNearbyServiceAdvertiser!, didNotStartAdvertisingPeer error: NSError!) {
     self.delegate?.didNotStartAdvertisingPeer(error)
   }
   
-  func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
+  public func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
     invitationHandler(true, self.mcSession)
   }
   
   // mark: MCNearbyServiceAdvertiserDelegate
   
-  func browser(browser: MCNearbyServiceBrowser!, didNotStartBrowsingForPeers error: NSError!) {
+  public func browser(browser: MCNearbyServiceBrowser!, didNotStartBrowsingForPeers error: NSError!) {
     self.delegate?.didNotStartBrowsingForPeers(error)
   }
   
-  func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject : AnyObject]!) {
+  public func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject : AnyObject]!) {
     let name = info["Name"] as? String
     delegate?.didFindPeerId(peerID, name: name)
     if self.myPeerId.hash < peerID.hash {
@@ -161,7 +161,7 @@ MCNearbyServiceBrowserDelegate {
     }
   }
   
-  func browser(browser: MCNearbyServiceBrowser!, lostPeer peerID: MCPeerID!) {
+  public func browser(browser: MCNearbyServiceBrowser!, lostPeer peerID: MCPeerID!) {
     delegate?.didLosePeerId(peerID)
   }
   
