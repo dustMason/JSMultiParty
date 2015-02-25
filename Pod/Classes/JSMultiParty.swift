@@ -29,7 +29,7 @@ MCNearbyServiceBrowserDelegate {
   var myPeerId: MCPeerID! = nil
   var serviceAdvertiser: MCNearbyServiceAdvertiser! = nil
   var serviceBrowser: MCNearbyServiceBrowser! = nil
-  var delegate: MultiPartyDelegate?
+  var delegate: JSMultiPartyDelegate?
   
   let recycledPeerIdKey = "recycled-multiparty-peer-id"
   
