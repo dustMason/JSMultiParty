@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "MultiParty"
-  s.version          = "0.1.0"
+  s.version          = "0.1.1"
   s.summary          = "Putting some fun into MultipeerConnectivity"
   s.description      = <<-DESC
                        A wrapper for Apple's MultipeerConnectivity framework that
