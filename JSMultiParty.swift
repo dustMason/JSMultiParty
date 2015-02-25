@@ -24,12 +24,12 @@ MCSessionDelegate,
 MCNearbyServiceAdvertiserDelegate,
 MCNearbyServiceBrowserDelegate {
   
+  public var delegate: JSMultiPartyDelegate?
+  public var myPeerId: MCPeerID! = nil
   var serviceType: String! = nil
   var mcSession: MCSession! = nil
-  var myPeerId: MCPeerID! = nil
   var serviceAdvertiser: MCNearbyServiceAdvertiser! = nil
   var serviceBrowser: MCNearbyServiceBrowser! = nil
-  var delegate: JSMultiPartyDelegate?
   
   let recycledPeerIdKey = "recycled-multiparty-peer-id"
   
