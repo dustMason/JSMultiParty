@@ -5,7 +5,7 @@
 import Foundation
 import MultipeerConnectivity
 
-protocol JSMultiPartyDelegate {
+public protocol JSMultiPartyDelegate {
   func didReceiveMessageFromPeerId(peerId: MCPeerID, message: AnyObject)
   func didConnectToPeerId(peerId: MCPeerID)
   func didDisconnectFromPeerId(peerId: MCPeerID)
@@ -19,7 +19,7 @@ protocol JSMultiPartyDelegate {
   func didNotStartBrowsingForPeers(error: NSError)
 }
 
-class JSMultiParty: NSObject,
+public class JSMultiParty: NSObject,
 MCSessionDelegate,
 MCNearbyServiceAdvertiserDelegate,
 MCNearbyServiceBrowserDelegate {

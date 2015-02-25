@@ -11,14 +11,8 @@ Pod::Spec.new do |s|
   s.license          = 'MIT'
   s.author           = { "Jordan Sitkin" => "jordan@fiftyfootfoghorn.com" }
   s.source           = { :git => "https://github.com/dustMason/JSMultiParty.git", :tag => s.version.to_s }
-
   s.platform     = :ios, '8.0'
   s.requires_arc = true
-
-  s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'MultiParty' => ['Pod/Assets/*.png']
-  }
-
+  s.source_files = 'JSMultiParty.swift'
   s.framework = 'MultipeerConnectivity'
 end
