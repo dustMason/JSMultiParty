@@ -1,0 +1,8 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+
+target 'MultiParty', :exclusive => true do
+  pod "MultiParty", :path => "../"
+
+  
+end
